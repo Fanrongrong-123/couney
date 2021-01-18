@@ -5,15 +5,8 @@
 </template>
 
 <style lang="scss">
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-ol, ul {
-  list-style: none;
-}
+@import "~@/assets/style/reset.scss";
+@import "~@/assets/style/helper.scss";
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

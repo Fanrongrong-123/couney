@@ -1,30 +1,30 @@
 <template>
-  <div class="nav-wrapper">
-    <div class="content">
+  <div class="lay">
+    <div class="nav-wrap" :class="classPrefix && `${classPrefix}-content`">
       <slot/>
-<!--      插槽：外面传什么内容，这里就是什么内容-->
     </div>
     <Nav/>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Nav from '@/components/Nav.vue'
 export default {
-  name: 'Layout'
+  name: 'Layout',
+  components: { Nav },
+  props: ['classPrefix']
 }
 </script>
 
-<style lang="scss" scoped>
-.nav-wrapper {
-  border: 1px solid red;
+<style scoped>
+.lay {
   display: flex;
   flex-direction: column;
   height: 100vh;
-
-  > .content {
-    flex-grow: 1;
-    overflow: auto;
-  }
 }
 
+.nav-wrap {
+  flex-grow: 1;
+  overflow: auto;
+}
 </style>

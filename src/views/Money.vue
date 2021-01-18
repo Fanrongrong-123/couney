@@ -1,16 +1,27 @@
 <template>
-  <layout>
-    <p>Money</p>
-  </layout>
+  <Layout class-prefix="layout">
+    <NumberPad/>
+    <Notes/>
+    <Tags/>
+    <Types/>
+  </Layout>
 </template>
 
-<script lang="ts">
+<script>
 
+import NumberPad from '@/components/Money/NumberPad'
+import Notes from '@/components/Money/Notes'
+import Tags from '@/components/Money/Tags'
+import Types from '@/components/Money/Types'
 export default {
-  name: 'Money'
+  name: 'Money',
+  components: { Types, Tags, Notes, NumberPad }
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
+.layout-content {
+  display: flex;
+  flex-direction: column-reverse;
+}
 </style>
