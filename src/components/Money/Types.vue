@@ -16,7 +16,7 @@ export default class Types extends Vue {
   type = '-';
 
   selectType (type: string) {
-    if (type !== '+' || type !== '-') {
+    if (type !== '+' && type !== '-') {
       throw new Error('type is unknown')
     } else {
       this.type = type

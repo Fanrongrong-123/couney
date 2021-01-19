@@ -43,7 +43,7 @@
     "sass-loader": "^8.0.2",
     "svg-sprite-loader": "^5.2.1",
     "svgo-loader": "^2.2.1",
-    "typescript": "~3.9.3",
+    "typescript": "~3.7.5",
     "vue-template-compiler": "^2.6.11"
   },
   "gitHooks": {
