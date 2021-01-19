@@ -4,7 +4,7 @@
     <NumberPad @update:value="onUpdateAmount"/>
     <Notes @update:value="onUpdateNotes"/>
     <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
-    <Types @update:value="onUpdateTypes"/>
+    <Types :value.sync="record.type"/>
   </Layout>
 </template>
 
@@ -30,7 +30,7 @@ export default class Money extends Vue {
   tags = ['衣', '食', '住', '行'];
 
   record: Record ={
-    notes: '', tag: [], type: '', amount: ''
+    notes: '', tag: [], type: '-', amount: ''
   }
 
   onUpdateTags (value: string[]) {
@@ -40,10 +40,6 @@ export default class Money extends Vue {
 
   onUpdateNotes (value: string) {
     this.record.notes = value
-  }
-
-  onUpdateTypes (value: string) {
-    this.record.type = value
   }
 
   onUpdateAmount (value: string) {
