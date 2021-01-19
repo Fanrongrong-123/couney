@@ -21,6 +21,7 @@ type Record = { // 声明类型
   tag: string[];
   type: string;
   amount: string;
+  createAt?: Date;
 }
 
 @Component({
@@ -56,9 +57,9 @@ export default class Money extends Vue {
   }
 
   saveRecord () {
-    const record2 = JSON.parse(JSON.stringify(this.record)) // 深拷贝做一个record的副本，避免传值互相影响
+    const record2: Record = JSON.parse(JSON.stringify(this.record)) // 深拷贝做一个record的副本，避免传值互相影响
+    record2.createAt = new Date()
     this.recordList.push(record2)
-    console.log(this.recordList)
   }
 
   @Watch('recordList')
