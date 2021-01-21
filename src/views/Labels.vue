@@ -3,26 +3,14 @@
     <Layout class="labels">
       <div>
         <ol class="tag">
-          <li>
-            <span>衣</span>
-            <icon name="right"/>
-          </li>
-          <li>
-            <span>食</span>
-            <icon name="right"/>
-          </li>
-          <li>
-            <span>住</span>
-            <icon name="right"/>
-          </li>
-          <li>
-            <span>行</span>
+          <li v-for="tag in tags" :key="tag">
+            <span>{{ tag }}</span>
             <icon name="right"/>
           </li>
         </ol>
       </div>
       <div class="addTags">
-        <button>新增标签</button>
+        <button @click="createTags">新增标签</button>
       </div>
     </Layout>
   </div>
@@ -31,9 +19,25 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import tagListModel from '@/models/tagListModel'
+
+tagListModel.fetch()
 
 @Component
 export default class Labels extends Vue {
+  tags = tagListModel.data;
+
+  createTags () {
+    const name = window.prompt('请输入你的标签名')
+    if (name) {
+      const message = tagListModel.create(name)
+      if (message === 'duplicate') {
+        alert('标签名重复')
+      } else if (message === 'success') {
+        alert('标签名创建成功')
+      }
+    }
+  }
 };
 </script>
 
@@ -58,16 +62,16 @@ export default class Labels extends Vue {
   }
 }
 
-.addTags{
+.addTags {
   text-align: center;
-  padding-top: 44px ;
+  padding-top: 44px;
 
-  > button{
+  > button {
     padding: 9px 15px;
     background: #767676;
     border: none;
     color: white;
-    border-radius: 4px ;
+    border-radius: 4px;
   }
 }
 </style>
