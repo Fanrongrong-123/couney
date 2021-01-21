@@ -28,7 +28,7 @@ const routes: Array<RouteConfig> = [
 
   },
   {
-    path: '/Labels/edit',
+    path: '/Labels/edit/:id', // :id用来暂位
     component: EditLabel
   },
   {
