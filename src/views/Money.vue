@@ -1,7 +1,9 @@
 <template>
   <Layout class-prefix="layout">
     <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
-    <Notes @update:value="onUpdateNotes"/>
+    <Notes field-name="备注："
+           placeholder="在这里输入备注"
+           @update:value="onUpdateNotes"/>
     <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
     <Types :value.sync="record.type"/>
     {{ recordList }}
@@ -27,7 +29,7 @@ import tagListModel from '@/models/tagListModel'
   }
 })
 export default class Money extends Vue {
-  tags = tagListModel.fetch()
+  tags = tagListModel.fetch();
   recordList = recordListModel.fetch();
 
   record: RecordItem = {
