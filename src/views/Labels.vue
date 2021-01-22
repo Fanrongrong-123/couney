@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="addTags">
-        <button @click="createTags">新增标签</button>
+        <Button @click="createTags">新增标签</Button>
       </div>
     </Layout>
   </div>
@@ -22,10 +22,12 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import tagListModel from '@/models/tagListModel'
+import Button from '@/components/Button.vue'
 
 tagListModel.fetch()
-
-@Component
+@Component({
+  components: { Button }
+})
 export default class Labels extends Vue {
   tags = tagListModel.data;
 
@@ -61,6 +63,10 @@ export default class Labels extends Vue {
     margin-left: 18px;
     border-bottom: 2px solid #EEEEEF;
     height: 44px;
+    >.icon{
+      width: 20px;
+      height: 20px;
+    }
   }
 }
 
