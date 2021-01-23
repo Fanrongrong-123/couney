@@ -1,15 +1,18 @@
 <template>
   <Layout class="bac">
     <div class="twitter-logo">
-      <icon name="left" class="leftIcon"/>
+      <icon name="left" class="leftIcon" @click="goBack"/>
       <span class="edit">编辑标签</span>
       <icon class="rightIcon"/>
     </div>
     <div class="from-item">
-      <FromItem :value="tag.name" field-name="标签名" placeholder="请输入标签名"/>
+      <FromItem :value="tag.name"
+                field-name="标签名" placeholder="请输入标签名"
+                @update:value="updateTag"
+      />
     </div>
     <div class="addTags">
-      <Button>刪除标签</Button>
+      <Button @click="remove">刪除标签</Button>
     </div>
   </Layout>
 </template>
@@ -40,6 +43,22 @@ export default class EditLabel extends Vue {
     } else {
       this.$router.replace('/404') // 路由器 用push回退不了，replace要回退两次
     }
+  }
+
+  updateTag (name: string) {
+    if (this.tag) {
+      tagListModel.update(this.tag.id, name)
+    }
+  }
+
+  remove () {
+    if (this.tag) {
+      tagListModel.remove(this.tag.id)
+    }
+  }
+
+  goBack () {
+    this.$router.back()
   }
 }
 </script>
