@@ -2,7 +2,9 @@
   <div>
     <label class="formItem">
       <span class="name">{{ this.fieldName }}</span>
-      <input type="text" :placeholder="placeholder" v-model="value">
+      <input type="text" :placeholder="placeholder"
+             :value="value"
+             @input="onNotesChanged($event.target.value)">
     </label>
   </div>
 </template>
@@ -13,7 +15,7 @@ import { Component, Prop, Watch } from 'vue-property-decorator'
 
 @Component
 export default class FromItem extends Vue {
-  value = '';
+  @Prop({ default: '' }) value!;
 
   @Prop({ required: true }) fieldName: string;
   @Prop() placeholder?: string;

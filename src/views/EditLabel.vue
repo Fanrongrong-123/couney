@@ -34,6 +34,7 @@ export default class EditLabel extends Vue {
     const tags = tagListModel.data
     const tag = tags.filter(t => t.id === id)[0]// filter返回一个数组
     if (tag) {
+      console.log('tag')
       console.log(tag)
     } else {
       this.$router.replace('/404') // 路由器 用push回退不了，replace要回退两次
@@ -53,9 +54,6 @@ export default class EditLabel extends Vue {
   font-size: 16px;
   padding: 10px 10px;
   background: white;
-
-  > .edit {
-  }
 
   > .leftIcon {
     width: 20px;
