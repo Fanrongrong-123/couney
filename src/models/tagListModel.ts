@@ -1,3 +1,5 @@
+import createId from '@/lib/createId'
+
 const localStorageKeyName = 'tagList'
 
 type Tag = {
@@ -23,10 +25,8 @@ const tagListModel: TagListModel = {
   create (name: string) {
     const names = this.data.map(item => item.name)
     if (names.indexOf(name) >= 0) { return 'duplicate' }
-    this.data.push({
-      id: name,
-      name: name
-    })
+    const id = createId().toString()
+    this.data.push({ id, name: name }) // id:id可缩写为id
     this.save()
     return 'success'
   },

@@ -8,7 +8,6 @@
     />
     <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
     <Types :value.sync="record.type"/>
-    {{ recordList }}
   </Layout>
 </template>
 
