@@ -6,7 +6,7 @@
       <icon class="rightIcon"/>
     </div>
     <div class="from-item">
-      <FromItem field-name="标签名" placeholder="请输入标签名"/>
+      <FromItem :value="tag.name" field-name="标签名" placeholder="请输入标签名"/>
     </div>
     <div class="addTags">
       <Button>刪除标签</Button>
@@ -28,14 +28,15 @@ import Button from '@/components/Button.vue'
   }
 })
 export default class EditLabel extends Vue {
+  tag?: { id: string; name: string } = undefined;
+
   created () {
     const id = this.$route.params.id // 获取路由信息
     tagListModel.fetch()
     const tags = tagListModel.data
     const tag = tags.filter(t => t.id === id)[0]// filter返回一个数组
     if (tag) {
-      console.log('tag')
-      console.log(tag)
+      this.tag = tag
     } else {
       this.$router.replace('/404') // 路由器 用push回退不了，replace要回退两次
     }
@@ -44,9 +45,10 @@ export default class EditLabel extends Vue {
 </script>
 
 <style lang="scss">
-.bac{
+.bac {
   background: #F5F5F5;
 }
+
 .twitter-logo {
   display: flex;
   justify-content: space-between;
@@ -65,7 +67,8 @@ export default class EditLabel extends Vue {
     height: 20px;
   }
 }
-.from-item{
+
+.from-item {
   background: white;
   margin-top: 8px;
 }
