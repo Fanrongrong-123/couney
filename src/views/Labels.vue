@@ -11,8 +11,8 @@
           </router-link>
         </div>
       </div>
-      <div class="addTags">
-        <Button @click="createTags">新增标签</Button>
+      <div class="createTag-wrapper">
+        <Button class="createTag" @click="createTags">新建标签</Button>
       </div>
     </Layout>
   </div>
@@ -24,12 +24,11 @@ import { Component } from 'vue-property-decorator'
 import tagListModel from '@/models/tagListModel'
 import Button from '@/components/Button.vue'
 
-tagListModel.fetch()
 @Component({
   components: { Button }
 })
 export default class Labels extends Vue {
-  tags = tagListModel.data;
+  tags = window.tagList;
 
   createTags () {
     const name = window.prompt('请输入你的标签名')
@@ -53,6 +52,9 @@ export default class Labels extends Vue {
 
 .tag {
   background: white;
+  max-height: 80vh;
+  overflow: auto;
+  border: 1px solid red;
 
   > .tag {
     display: flex;
@@ -63,23 +65,26 @@ export default class Labels extends Vue {
     margin-left: 18px;
     border-bottom: 2px solid #EEEEEF;
     height: 44px;
-    >.icon{
+
+    > .icon {
       width: 20px;
       height: 20px;
     }
   }
 }
 
-.addTags {
-  text-align: center;
-  padding-top: 44px;
+.createTag {
+  background: #767676;
+  color: white;
+  border-radius: 4px;
+  border: none;
+  height: 40px;
+  padding: 0 16px;
 
-  > button {
-    padding: 9px 15px;
-    background: #767676;
-    border: none;
-    color: white;
-    border-radius: 4px;
+  &-wrapper {
+    text-align: center;
+    padding: 16px;
+    margin-top: 44-16px;
   }
 }
 </style>

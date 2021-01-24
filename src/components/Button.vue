@@ -1,9 +1,7 @@
 <template>
-  <div class="button" @click="$emit('click',$event)">
-    <button>
-      <slot/>
-    </button>
-  </div>
+  <button class="button" @click="$emit('click', $event)">
+    <slot/>
+  </button>
 </template>
 
 <script lang="ts">
@@ -12,17 +10,19 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .button {
-  text-align: center;
-  padding-top: 44px;
+  background: #767676;
+  color: white;
+  border-radius: 4px;
+  border: none;
+  height: 40px;
+  padding: 0 16px;
 
-  > button {
-    padding: 8px 15px;
-    background: #767676;
-    border: none;
-    color: white;
-    border-radius: 4px;
+  &-wrapper {
+    text-align: center;
+    padding: 16px;
+    margin-top: 44-16px;
   }
 }
 </style>
