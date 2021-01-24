@@ -53,14 +53,12 @@ export default class Money extends Vue {
   }
 
   saveRecord () {
-    const record2: RecordItem = JSON.parse(JSON.stringify(this.record)) // 深拷贝做一个record的副本，避免传值互相影响
-    record2.createAt = new Date()
-    this.recordList.push(record2)
+    recordListModel.create(this.record)
   }
 
   @Watch('recordList')
   onRecordListChange () {
-    recordListModel.save(this.recordList)
+    recordListModel.save()
   }
 }
 
@@ -71,7 +69,8 @@ export default class Money extends Vue {
   display: flex;
   flex-direction: column-reverse;
 }
-.item{
+
+.item {
   background: #F5F5F5;
   padding: 5px 0;
 }
