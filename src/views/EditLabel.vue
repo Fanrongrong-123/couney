@@ -8,8 +8,7 @@
     <div class="from-item">
       <FromItem :value="tag.name"
                 field-name="标签名" placeholder="请输入标签名"
-                @update:value="updateTag"
-      />
+                @update:value="updateTag"/>
     </div>
     <div class="addTags">
       <Button @click="remove">刪除标签</Button>

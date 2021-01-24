@@ -15,9 +15,9 @@ import { Component, Prop, Watch } from 'vue-property-decorator'
 
 @Component
 export default class FromItem extends Vue {
-  @Prop({ default: '' }) value!;
+  @Prop({ default: '' }) value!: string;
 
-  @Prop({ required: true }) fieldName: string;
+  @Prop({ required: true }) fieldName!: string;
   @Prop() placeholder?: string;
 
   @Watch('value')
