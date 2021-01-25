@@ -26,6 +26,13 @@ window.createTag = (name: string) => {
     }
   }
 }
+window.removeTag = (id: string) => {
+  return tagListModel.remove(id) // 简化了成功和失败的代码，具体看removeTag定义的类型
+}
+
+window.updateTag = (id: string, name: string) => {
+  return tagListModel.update(id, name)
+}
 
 new Vue({
   router, // 自动引用index.ts的router

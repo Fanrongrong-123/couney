@@ -25,4 +25,6 @@ type TagListModel = {
 interface Window {
   tagList: Tag[];
   createTag: (name: string) => void;
+  removeTag: (id: string) => boolean;
+  updateTag: TagListModel['update']; // 类型与TagListModel['update']相同
 }
