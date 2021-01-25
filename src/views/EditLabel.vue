@@ -33,8 +33,7 @@ export default class EditLabel extends Vue {
 
   created () {
     const id = this.$route.params.id // 获取路由信息
-    const tags = window.tagList
-    const tag = tags.filter(t => t.id === id)[0]// filter返回一个数组
+    const tag = window.findTag(id)// filter返回一个数组
     if (tag) {
       this.tag = tag
     } else {
