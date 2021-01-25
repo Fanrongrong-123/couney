@@ -29,7 +29,7 @@ import Button from '@/components/Button.vue'
   }
 })
 export default class EditLabel extends Vue {
-  tag?: { id: string; name: string } = undefined;
+  tag?: Tag = undefined;
 
   created () {
     const id = this.$route.params.id // 获取路由信息
