@@ -21,3 +21,8 @@ type TagListModel = {
   remove: (id: string) => boolean;
   save: () => void;
 }
+
+// 自定义挂在window上的属性
+// interface Window {
+//
+// }
