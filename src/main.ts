@@ -16,6 +16,16 @@ Vue.component('Layout', Layout)
 Vue.component('icon', icon)
 
 window.tagList = tagListModel.fetch()
+window.createTag = (name: string) => {
+  const message = tagListModel.create(name)
+  if (name) {
+    if (message === 'duplicate') {
+      alert('标签名重复')
+    } else if (message === 'success') {
+      alert('标签名创建成功')
+    }
+  }
+}
 
 new Vue({
   router, // 自动引用index.ts的router
