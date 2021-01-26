@@ -6,7 +6,7 @@
               @update:value="onUpdateNotes"
               class="item"
     />
-    <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
+    <Tags/>
     <Types :value.sync="record.type"/>
   </Layout>
 </template>
@@ -29,7 +29,6 @@ import { Component } from 'vue-property-decorator'
   }
 })
 export default class Money extends Vue {
-  tags = store.tagList;
   recordList = store.recordList;
 
   record: RecordItem = {
@@ -38,10 +37,6 @@ export default class Money extends Vue {
     type: '-',
     amount: ''
   };
-
-  onUpdateTags (value: string[]) {
-    this.record.tag = value
-  }
 
   onUpdateNotes (value: string) {
     this.record.notes = value
