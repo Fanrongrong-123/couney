@@ -42,12 +42,13 @@ export default class Labels extends Vue {
 <style lang="scss">
 .labels {
   background: #F5F5F5;
+  position: relative;
 
 }
 
 .tag {
   background: white;
-  max-height: 80vh;
+  max-height: 75vh;
   overflow: auto;
 
   > .tag {
@@ -68,17 +69,12 @@ export default class Labels extends Vue {
 }
 
 .createTag {
-  background: #767676;
-  color: white;
-  border-radius: 4px;
-  border: none;
-  height: 40px;
-  padding: 0 16px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50px);
 
   &-wrapper {
-    text-align: center;
-    padding: 16px;
-    margin-top: 44-16px;
+    margin-top: 10px;
   }
 }
 </style>
