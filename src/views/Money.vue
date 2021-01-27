@@ -6,7 +6,7 @@
               @update:value="onUpdateNotes"
               class="item"
     />
-    <Tags/>
+    <Tags @update:value="onUpdateTags"/>
     <Types :value.sync="record.type"/>
   </Layout>
 </template>
@@ -44,6 +44,10 @@ export default class Money extends Vue {
 
   onUpdateAmount (value: string) {
     this.record.amount = value
+  }
+
+  onUpdateTags (value: string[]) {
+    this.record.tag = value
   }
 
   saveRecord () {

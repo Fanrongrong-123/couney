@@ -37,13 +37,8 @@ export default class Tags extends Vue {
 
   create () {
     const name = window.prompt('请输入标签名')
-    if (name === '') {
-      window.alert('标签名不能为空')
-    } else if (name === null) {
-      return
-    } else if (this.tagList!.indexOf(name) >= 0) {
-      window.alert('标签名重复')
-    }
+    if (!name) { return window.alert('标签名不能为空') }
+    this.$emit('onUpdateTags', name)
     store.createTag(name)
   }
 }
