@@ -7,6 +7,8 @@
               class="item"
     />
     <Tags @update:value="onUpdateTags"/>
+    <button @click="add"> +1</button>
+    {{ count }}
     <Types :value.sync="record.type"/>
   </Layout>
 </template>
@@ -26,10 +28,19 @@ import { Component } from 'vue-property-decorator'
     Tags,
     FromItem,
     NumberPad
+  },
+  computed: { // computed功能，当里面的值变化时就会更新外面的值
+    count () {
+      return store.count
+    },
+    recordList () {
+      return store.recordList // 传的对象（地址）
+    }
+
   }
 })
 export default class Money extends Vue {
-  recordList = store.recordList;
+  // count = store.count; //传值，只一开始传了一次（只获取一次），所以直接调用store.addCount()，money的count不会变化
 
   record: RecordItem = {
     notes: '',
@@ -37,6 +48,8 @@ export default class Money extends Vue {
     type: '-',
     amount: ''
   };
+
+  count: any;
 
   onUpdateNotes (value: string) {
     this.record.notes = value
@@ -52,6 +65,11 @@ export default class Money extends Vue {
 
   saveRecord () {
     store.createRecord(this.record)
+  }
+
+  add () {
+    store.addCount()
+    console.log('money.count：' + `${this.count}`)
   }
 }
 
