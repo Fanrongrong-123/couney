@@ -17,7 +17,6 @@ import NumberPad from '@/components/Money/NumberPad.vue'
 import FromItem from '@/components/Money/FormItem.vue'
 import Tags from '@/components/Money/Tags.vue'
 import Types from '@/components/Money/Types.vue'
-import store from '@/store/index.ts'
 import { Component } from 'vue-property-decorator'
 
 @Component({
