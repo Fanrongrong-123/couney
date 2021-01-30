@@ -12,16 +12,17 @@
         </div>
       </div>
       <div class="createTag-wrapper">
-        <Button class="createTag" @click="createTags">新建标签</Button>
+        <Button class="createTag" @click="createTag">新建标签</Button>
       </div>
     </Layout>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import Button from '@/components/Button.vue'
+import { mixins } from 'vue-class-component'
+import tagHelper from '@/mixins/tagHelper.ts'
 
 @Component({
   components: { Button },
@@ -31,16 +32,9 @@ import Button from '@/components/Button.vue'
     }
   }
 })
-export default class Labels extends Vue {
+export default class Labels extends mixins(tagHelper) {
   beforeCreate () {
     this.$store.commit('fetchTags')
-  }
-
-  createTags () {
-    const name = window.prompt('请输入标签名')
-    if (!name) { return window.alert('标签名不能为空') }
-    this.$emit('onUpdateTags', name)
-    this.$store.commit('createTag', name)
   }
 };
 </script>
