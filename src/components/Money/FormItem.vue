@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop, Watch } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class FromItem extends Vue {
@@ -20,7 +20,6 @@ export default class FromItem extends Vue {
   @Prop({ required: true }) fieldName!: string;
   @Prop() placeholder?: string;
 
-  @Watch('value')
   onNotesChanged (value: string) {
     this.$emit('update:value', value)
   }

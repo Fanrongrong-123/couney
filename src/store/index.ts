@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import clone from '@/lib/clone'
 import createId from '@/lib/createId'
+import router from '@/router'
 
 Vue.use(Vuex) // 将store绑到Vue.prototype上
 
@@ -55,6 +56,39 @@ const store = new Vuex.Store({
     },
     saveTags (state) {
       window.localStorage.setItem('tagList', JSON.stringify(state.tagList))
+    },
+    updateTag (state, payload: { id: string; name: string }) {
+      const idList = state.tagList.map(item => item.id)
+      const {
+        id,
+        name
+      } = payload // es6析构语法，id和name来自于object
+      if (idList.indexOf(id) >= 0) {
+        const names = state.tagList.map(item => item.name)
+        if (names.indexOf(name) >= 0) {
+          alert('标签名重复')
+        } else {
+          const tag = state.tagList.filter(item => item.id === id)[0]
+          tag.name = name
+          store.commit('saveTags')
+        }
+      }
+    },
+    removeTag (state, id: string) {
+      let index = -1
+      for (let i = 0; i < state.tagList.length; i++) {
+        if (state.tagList[i].id === id) {
+          index = i
+          break
+        }
+      }
+      if (index >= 0) {
+        state.tagList.splice(index, 1)
+        store.commit('saveTags')
+        router.back()
+      } else {
+        alert('删除失败')
+      }
     }
   }
 })
