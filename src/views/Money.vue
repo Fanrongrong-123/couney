@@ -25,11 +25,6 @@ import { Component } from 'vue-property-decorator'
     Tags,
     FromItem,
     NumberPad
-  },
-  computed: {
-    recordList () {
-      return this.$store.state.recordList
-    }
   }
 })
 export default class Money extends Vue {
@@ -39,6 +34,10 @@ export default class Money extends Vue {
     type: '-',
     amount: ''
   };
+
+  get recordList () {
+    return this.$store.state.recordList
+  }
 
   created () {
     this.$store.commit('fetchRecords')
