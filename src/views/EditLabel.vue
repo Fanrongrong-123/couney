@@ -6,7 +6,7 @@
       <icon class="rightIcon"/>
     </div>
     <div class="from-item">
-      <FromItem :value="tag.name"
+      <FromItem :value="currentTag.name"
                 field-name="编辑标签：" placeholder="请输入标签名"
                 @update:value="updateTag"/>
     </div>
@@ -29,7 +29,7 @@ import Button from '@/components/Button.vue'
   }
 })
 export default class EditLabel extends Vue {
-  get tag () {
+  get currentTag () {
     return this.$store.state.currentTag
   }
 
@@ -37,23 +37,23 @@ export default class EditLabel extends Vue {
     this.$store.commit('fetchTags')
     const id = this.$route.params.id
     this.$store.commit('setCurrentTag', id)
-    if (!this.tag) {
+    if (!this.currentTag) {
       this.$router.replace('/404') // 路由器 用push回退不了，replace要回退两次
     }
   }
 
   updateTag (name: string) {
-    if (this.tag) {
+    if (this.currentTag) {
       this.$store.commit('updateTag', {
-        id: this.tag.id,
+        id: this.currentTag.id,
         name: name
       })
     }
   }
 
   remove () {
-    if (this.tag) {
-      this.$store.commit('removeTag', this.tag.id)
+    if (this.currentTag) {
+      this.$store.commit('removeTag', this.currentTag.id)
     }
   }
 

@@ -59,10 +59,7 @@ const store = new Vuex.Store({
     },
     updateTag (state, payload: { id: string; name: string }) {
       const idList = state.tagList.map(item => item.id)
-      const {
-        id,
-        name
-      } = payload // es6析构语法，id和name来自于object
+      const { id, name } = payload // es6析构语法，id和name来自于object
       if (idList.indexOf(id) >= 0) {
         const names = state.tagList.map(item => item.name)
         if (names.indexOf(name) >= 0) {
