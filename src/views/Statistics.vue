@@ -2,8 +2,6 @@
   <layout>
     <Tabs class-prefix="type" :data-source="typeList" :value.sync="type"/>
     <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
-    {{type}}
-    {{interval}}
   </layout>
 </template>
 
@@ -32,14 +30,12 @@ export default class Statistics extends Vue {
   background: white;
 
   &.selected {
-    $bg: #c4c4c4;
-    background: $bg;
-
-    &::after {
-      display: block;
-
-    }
+    background: #c4c4c4;
   }
+}
+
+::v-deep .interval-tabs-item {
+  height: 48px;
 }
 
 </style>
