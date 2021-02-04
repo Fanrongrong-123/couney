@@ -13,7 +13,7 @@ const recordStore = {
   },
   createRecord (record: RecordItem) {
     const record2: RecordItem = clone(record) // 深拷贝做一个record的副本，避免传值互相影响
-    record2.createAt = new Date()
+    record2.createAt = new Date().toISOString()
     this.recordList && this.recordList.push(record2) // this.recordList?.push(record2)
     recordStore.saveRecords()
   }
