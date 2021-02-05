@@ -2,25 +2,15 @@
   <layout>
     <Tabs class-prefix="type" :data-source="typeList" :value.sync="type"/>
     <div class="sticky">
-    <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
+      <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
     </div>
     <ol>
       <li v-for="(group,index) in result" :key="index">
-        <h3 class="title">{{ group.title }}</h3>
+        <h3 class="title">{{ beautify(group.title) }}</h3>
         <ol>
           <li v-for="item in group.items" :key="item.id" class="record">
-            <span>{{tagString(item.tag)}}</span>
-            <span class="notes">{{item.notes}}</span>
-            <span>￥{{ item.amount }}</span>
-          </li>
-        </ol>
-      </li>
-      <li v-for="(group,index) in result" :key="index">
-        <h3 class="title">{{ group.title }}</h3>
-        <ol>
-          <li v-for="item in group.items" :key="item.id" class="record">
-            <span>{{tagString(item.tag)}}</span>
-            <span class="notes">{{item.notes}}</span>
+            <span>{{ tagString(item.tag) }}</span>
+            <span class="notes">{{ item.notes }}</span>
             <span>￥{{ item.amount }}</span>
           </li>
         </ol>
@@ -34,6 +24,7 @@ import { Component } from 'vue-property-decorator'
 import Tabs from '@/components/Tabs.vue'
 import intervalList from '@/constants/intervalList'
 import typeList from '@/constants/typeList'
+import dayjs from 'dayjs'
 
 @Component({
   components: {
@@ -41,6 +32,35 @@ import typeList from '@/constants/typeList'
   }
 })
 export default class Statistics extends Vue {
+  beautify (string: string) {
+    // const now = new Date();
+    const day = dayjs(string)
+    const now = dayjs() // 与下一行的now兼容
+    if (day.isSame(now, 'day')) {
+      return '今天'
+    } else if (day.isSame(now.subtract(1, 'day'), 'day')) {
+      return '昨天'
+    } else if (day.isSame(now.subtract(2, 'day'), 'day')) {
+      return '前天'
+    } else if (day.isSame(now, 'year')) {
+      return day.format('M月D日')
+    } else {
+      return day.format('YYYY年M月D日')
+    }
+
+    // const d = new Date(Date.parse(string));
+    // const y = d.getFullYear();
+    // const m = d.getMonth();
+    // const dd = d.getDay();
+    // const now = new Date();
+    // if (now.getFullYear() === y && now.getMonth() === m && now.getDay() === dd) {
+    //   return '今天';
+    // } else {
+    //   return string;
+    // }
+    // console.log(y, m, dd);
+  }
+
   tagString (tag: Tag[]) {
     return tag.length === 0 ? '无' : tag
   }
@@ -64,7 +84,6 @@ export default class Statistics extends Vue {
       }
       hashTable[date].items.push(recordList[i])
     }
-    console.log(hashTable)
     return hashTable
   }
 
@@ -98,13 +117,13 @@ export default class Statistics extends Vue {
   }
 }
 
-.sticky{
+.sticky {
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
 }
 
-.notes{
+.notes {
   margin-right: auto;
   margin-left: 16px;
   color: #999999;
