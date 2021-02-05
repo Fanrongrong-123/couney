@@ -120,7 +120,7 @@ export default class Statistics extends Vue {
 .sticky {
   position: -webkit-sticky;
   position: sticky;
-  top: 0px;
+  top: 0;
 }
 
 .notes {
