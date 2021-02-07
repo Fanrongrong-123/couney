@@ -5,7 +5,9 @@
     </div>
     <ol>
       <li v-for="(group,index) in groupedList" :key="index">
-        <h3 class="title">{{ beautify(group.title) }}</h3>
+        <h3 class="title">{{ beautify(group.title) }}
+        <span>{{group.total}}</span>
+        </h3>
         <ol>
           <li v-for="item in group.items" :key="item.id" class="record">
             <span>{{ tagString(item.tag) }}</span>
@@ -61,7 +63,9 @@ export default class Statistics extends Vue {
     const { recordList } = this
 
     const newList = clone(recordList).filter(r => r.type === this.type).sort((a, b) => dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf())
-    const result = [{
+
+    type Result = { title: string; items: RecordItem[]; total?: number }[]
+    const result: Result = [{
       title: dayjs(newList[0].createAt).format('YYYY-MM-DD'),
       items: [newList[0]]
     }]
@@ -78,6 +82,9 @@ export default class Statistics extends Vue {
           items: [current]
         })
       }
+      result.map(group => {
+        group.total = group.items.reduce((sum, item) => sum + item.amount, 0)
+      })
     }
     return result
   }

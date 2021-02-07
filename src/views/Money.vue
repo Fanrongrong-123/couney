@@ -32,7 +32,7 @@ export default class Money extends Vue {
     notes: '',
     tag: [],
     type: '-',
-    amount: ''
+    amount: 0
   };
 
   typeList = typeList;
@@ -49,7 +49,7 @@ export default class Money extends Vue {
     this.record.notes = value
   }
 
-  onUpdateAmount (value: string) {
+  onUpdateAmount (value: number) {
     this.record.amount = value
   }
 

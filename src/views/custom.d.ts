@@ -3,7 +3,7 @@ type RecordItem = { // 声明类型
   notes: string;
   tag: string[];
   type: string;
-  amount: string;
+  amount: number;
   createAt?: string;
 }
 
