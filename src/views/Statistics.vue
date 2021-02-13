@@ -6,7 +6,7 @@
     <ol>
       <li v-for="(group,index) in groupedList" :key="index">
         <h3 class="title">{{ beautify(group.title) }}
-        <span>{{group.total}}</span>
+          <span>{{ group.total }}</span>
         </h3>
         <ol>
           <li v-for="item in group.items" :key="item.id" class="record">
@@ -52,7 +52,8 @@ export default class Statistics extends Vue {
   }
 
   tagString (tag: Tag[]) {
-    return tag.length === 0 ? '无' : tag
+    const tagName = tag.map(i => i.name)
+    return tag.length === 0 ? '无' : tagName.join('，')
   }
 
   get recordList () {
@@ -63,6 +64,7 @@ export default class Statistics extends Vue {
     const { recordList } = this
 
     const newList = clone(recordList).filter(r => r.type === this.type).sort((a, b) => dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf())
+    if (newList.length === 0) { return [] as Result }
 
     type Result = { title: string; items: RecordItem[]; total?: number }[]
     const result: Result = [{
@@ -70,7 +72,6 @@ export default class Statistics extends Vue {
       items: [newList[0]]
     }]
 
-    if (newList.length === 0) { return [] }
     for (let i = 1; i < newList.length; i++) {
       const current = newList[i]
       const last = result[result.length - 1]

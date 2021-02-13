@@ -4,8 +4,9 @@
     <FromItem field-name="备注："
               placeholder="在这里输入备注"
               @update:value="onUpdateNotes"
+              :value="record.notes"
               class="item"/>
-    <Tags @update:value="onUpdateTags"/>
+    <Tags @update:value="onUpdateTags" :selected-tags="record.tag"/>
     <Tabs :value.sync="record.type" :data-source="typeList"/>
   </Layout>
 </template>
@@ -55,10 +56,13 @@ export default class Money extends Vue {
 
   onUpdateTags (value: string[]) {
     this.record.tag = value
+    return this.record.tag
   }
 
   saveRecord () {
     this.$store.commit('createRecord', this.record)
+    this.record.notes = ''
+    this.record.tag = []
   }
 }
 

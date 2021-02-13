@@ -28,6 +28,7 @@ const store = new Vuex.Store({
     },
     saveRecords (state) {
       window.localStorage.setItem('recordList', JSON.stringify(state.recordList))
+      window.alert('已保存')
     },
     fetchTags (state) {
       state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]')

@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
 import tagHelper from '@/mixins/tagHelper'
 
@@ -22,7 +22,7 @@ import tagHelper from '@/mixins/tagHelper'
   mixins: [tagHelper]
 })
 export default class Tags extends mixins(tagHelper) {
-  selectedTags: string[] = [];
+  @Prop({ default: [] }) selectedTags!: string[];
 
   get tagList () {
     return this.$store.state.tagList

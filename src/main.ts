@@ -19,3 +19,10 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+// 将页面下移遮住流浪器导航栏
+window.onload = function () {
+  setTimeout(function () {
+    window.scrollTo(0, 10000)
+  }, 0)
+}
