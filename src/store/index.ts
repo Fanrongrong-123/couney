@@ -32,7 +32,14 @@ const store = new Vuex.Store({
     },
     fetchTags (state) {
       state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]')
-      return state.tagList
+      if (!state.tagList || state.tagList.length === 0) {
+        store.commit('createTag', '衣')
+        store.commit('createTag', '食')
+        store.commit('createTag', '住')
+        store.commit('createTag', '行')
+      } else {
+        return state.tagList
+      }
     },
     createTag (state, name: string) {
       const names = state.tagList.map(item => item.name)
@@ -46,7 +53,6 @@ const store = new Vuex.Store({
         name: name
       }) // id:id可缩写为id
       store.commit('saveTags')
-      alert('标签名创建成功')
       return 'success'
     },
     saveTags (state) {
@@ -54,7 +60,10 @@ const store = new Vuex.Store({
     },
     updateTag (state, payload: { id: string; name: string }) {
       const idList = state.tagList.map(item => item.id)
-      const { id, name } = payload // es6析构语法，id和name来自于object
+      const {
+        id,
+        name
+      } = payload // es6析构语法，id和name来自于object
       if (idList.indexOf(id) >= 0) {
         const names = state.tagList.map(item => item.name)
         if (names.indexOf(name) >= 0) {

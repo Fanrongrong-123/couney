@@ -5,7 +5,8 @@ import Component from 'vue-class-component'
 export class TagHelper extends Vue {
   createTag () {
     const name = window.prompt('请输入标签名')
-    if (!name) { return window.alert('标签名不能为空') }
+    if (name === '') { return window.alert('标签名不能为空') }
+    if (name === null) { return }
     this.$emit('onUpdateTags', name)
     this.$store.commit('createTag', name)
   }
