@@ -1,13 +1,13 @@
 <template>
   <Layout class-prefix="layout">
-    <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
+    <NumberPad @update:value="onUpdateAmount" @submit="saveRecord" :value="output"/>
+    <Tabs :value.sync="record.type" :data-source="typeList"/>
     <FromItem field-name="备注："
               placeholder="在这里输入备注"
               @update:value="onUpdateNotes"
               :value="record.notes"
               class="item"/>
     <Tags @update:value="onUpdateTags" :selected-tags="record.tag"/>
-    <Tabs :value.sync="record.type" :data-source="typeList"/>
   </Layout>
 </template>
 
@@ -36,6 +36,7 @@ export default class Money extends Vue {
     amount: 0
   };
 
+  output = '0';
   typeList = typeList;
 
   get recordList () {
@@ -51,7 +52,7 @@ export default class Money extends Vue {
   }
 
   onUpdateAmount (value: number) {
-    this.record.amount = value
+    this.record.amount = parseFloat(value.toString())
   }
 
   onUpdateTags (value: string[]) {
@@ -60,6 +61,13 @@ export default class Money extends Vue {
   }
 
   saveRecord () {
+    if (!this.record.tag || this.record.tag.length === 0) {
+      return window.alert('请选中至少一个标签')
+    }
+    if (this.record.amount === 0) {
+      console.log(parseFloat(this.record.amount.toString()))
+      return window.alert('请输入金额')
+    }
     this.$store.commit('createRecord', this.record)
     this.record.notes = ''
     this.record.tag = []
@@ -77,5 +85,10 @@ export default class Money extends Vue {
 .item {
   background: #F5F5F5;
   padding: 5px 0;
+}
+
+.tags{
+  max-height: 40vh;
+  overflow: auto;
 }
 </style>

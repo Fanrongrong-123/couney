@@ -1,9 +1,9 @@
 <template>
   <layout>
-    <div class="sticky">
+    <div>
       <Tabs class-prefix="type" :data-source="typeList" :value.sync="type"/>
     </div>
-    <ol v-if="groupedList.length>0">
+    <ol v-if="groupedList.length>0" class="max-height">
       <li v-for="(group,index) in groupedList" :key="index">
         <h3 class="title">{{ beautify(group.title) }}
           <span>{{ group.total }}</span>
@@ -56,7 +56,7 @@ export default class Statistics extends Vue {
 
   tagString (tag: Tag[]) {
     const tagName = tag.map(i => i.name)
-    return tag.length === 0 ? '无' : tagName.join('，')
+    return tagName.join('，')
   }
 
   get recordList () {
@@ -123,12 +123,6 @@ export default class Statistics extends Vue {
   }
 }
 
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-}
-
 .notes {
   margin-right: auto;
   margin-left: 16px;
@@ -156,7 +150,11 @@ export default class Statistics extends Vue {
 
 .null{
   text-align: center;
-  padding-top: 30vh;
+  margin-top: 30vh;
+}
+.max-height{
+  max-height: 80vh;
+  overflow: auto;
 }
 
 </style>

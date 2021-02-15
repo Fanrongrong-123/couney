@@ -22,16 +22,17 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class NumberPad extends Vue {
-  output = '0';
+  @Prop(String) value!: string
+  output= this.value
 
   inputContent (event: MouseEvent) {
     const button = (event.target as HTMLButtonElement)
     const input = button.textContent! // 强制指定input存在
-    if (this.output.length === 15) { return }
+    if (this.output.length === 15) { return window.alert('不能再多了') }
     if (this.output === '0') {
       if ('0123456789'.indexOf(input) >= 0) {
         this.output = input
@@ -57,7 +58,7 @@ export default class NumberPad extends Vue {
   }
 
   ok () {
-    const number = parseInt(this.output)
+    const number = this.output
     this.$emit('update:value', number)
     this.$emit('submit', number)
     this.output = '0'
